@@ -35,17 +35,9 @@
 Function.prototype.myBind = function(context) {
   let that = this;
   let bindArgs = Array.from(arguments).slice(1);
-    // if (bindArgs.length > 1 && typeof bindArgs[0] === "object") {
-    //   bindArgs = bindArgs.slice(1);
-    // } 
-  // console.log(bindArgs);
 
   return function() {
     let callArgs = Array.from(arguments);
-      // if (callArgs.length > 1  && typeof arguments[0] === "object") {
-      //   callArgs = callArgs.slice(1);
-      // } 
-    // console.log(callArgs);
     return that.apply(context, bindArgs.concat(callArgs));
   }
 
