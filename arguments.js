@@ -105,6 +105,7 @@ notMarkovSays("meow", "me");
 
 
 console.log('\ntesting curry 🍛')
+console.log('curry1')
 function curriedSum(numArgs) {
   let numbers = [];
 
@@ -120,3 +121,21 @@ function curriedSum(numArgs) {
 
 const total = curriedSum(4);
 console.log(total(5)(30)(20)(1)); // => 56
+
+console.log('\ncurry2')
+Function.prototype.curry = function(numArgs) {
+  let numbers = [];
+  let that = this;
+
+  return function _curriedSum(num) {
+    numbers.push(num);
+    if (numbers.length === numArgs) {
+      return that.call({}, ...numbers); //alternate is .apply({}, numbers);
+    } else {
+      return _curriedSum;
+    }
+  };
+};
+
+const total2 = sum.curry(4);
+console.log(total2(5)(30)(20)(1)); // => 56
